@@ -28,10 +28,10 @@ private:
   const int _addr;
   TwoWire& _wire;
   HTU21DResolution _resolution;
-  
+
   float temperature;
   float humidity;
-  
+
   enum HTU21DCmd {
     TRIGGER_TEMP_MEAS_H = 0xE3,
     TRIGGER_HUM_MEAS_H = 0xE5,
@@ -41,20 +41,20 @@ private:
     READ_USER_REG = 0xE7,
     SOFT_RESET = 0xFE
   };
-  
+
   bool measureTemperature();
   bool measureHumidity();
   bool checkCRC8(uint8_t data[]);
 public:
   HTU21D(int addr = HTU21D_ADDR, TwoWire& wire = Wire);
-  
+
   bool measure();
   float getTemperature(void) const;
   float getHumidity(void) const;
   void setResolution(HTU21DResolution resolution);
   HTU21DResolution getResolution(void);
   bool reset(void);
-  bool begin(void);
+  bool begin(int sda = -1, int scl = -1);
 };
 
 

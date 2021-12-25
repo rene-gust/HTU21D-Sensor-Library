@@ -130,8 +130,12 @@ HTU21DResolution HTU21D::getResolution() {
  * Initializes the I2C transport (Wire.begin()) and resets the sensor.
  * @return true if the initialization was successful, otherwise false
  */
-bool HTU21D::begin() {
-  _wire.begin();
+bool HTU21D::begin(int sda, int scl) {
+  if (sda == -1 && scl == -1) {
+    _wire.begin();
+  } else {
+    _wire.begin(sda, scl);
+  }
   return reset();
 }
   
